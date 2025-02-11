@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Sign-Up Form</title>
+</head>
+<body class="min-h-screen flex justify-center items-center font-mono bg-slate-700">
+  <div class="md:flex md:m-0 m-2 bg-white rounded-lg md:w-[40rem] w-full">
+    <div id="logo" class="md:w-80 w-full flex flex-col items-center justify-center relative md:pt-0 pt-12">
+      <div class="absolute bg-slate-700 h-20 w-12 top-0 md:left-5 left-3 rounded-b-lg"></div>
+      <h1 class="text-center md:text-[22px] text-[18px] font-bold text-slate-700">Hello, Welcome!</h1>
+      <div class="flex items-center justify-center">
+        <img src="logo.png" alt="Logo" class="md:h-32 h-24 md:w-32 w-24 object-contain">
+      </div>
+    </div>
+    <div class="md:w-80 w-full text-white">
+      <form id="signupForm" class="border p-4 bg-slate-700 rounded-lg">
+        <h1 class="text-center text-[30px]">SIGN-UP</h1>
+
+        <!-- Fullname Field -->
+        <label for="fname" class="py-2 w-full block">Fullname: </label>
+        <input id="fname" type="text" placeholder="Enter your fullname" required class="p-2 w-full rounded-md text-black">
+
+        <!-- Email Field -->
+        <label for="email" class="py-2 w-full block">Email: </label>
+        <input id="email" type="email" placeholder="Enter your email" required 
+               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+               title="Enter a valid email address (e.g., user@example.com)"
+               class="p-2 w-full rounded-md text-black">
+
+        <!-- Username Field -->
+        <label for="username" class="py-2 w-full block">Username: </label>
+        <input id="username" type="text" placeholder="Enter your username" required 
+               pattern="^[a-zA-Z0-9_-]{3,16}$" 
+               title="Username must be 3-16 characters long and can only include letters, numbers, underscores, and hyphens."
+               class="p-2 w-full rounded-md text-black">
+
+        <!-- Password Field -->
+        <label for="password" class="py-2 w-full block">Password: </label>
+        <input id="password" type="password" placeholder="Enter your password" required 
+               pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
+               title="Password must be at least 8 characters long, include at least one letter and one number."
+               class="p-2 w-full rounded-md text-black">
+
+        <!-- Confirm Password Field -->
+        <label for="cpassword" class="py-2 w-full block">Confirm Password: </label>
+        <input id="cpassword" type="password" placeholder="Re-enter your password" required 
+               class="p-2 w-full rounded-md text-black">
+
+        <div class="flex justify-center text-center mt-6">
+          <button type="button" class="bg-slate-700 border border-white text-white p-2 w-full rounded-lg hover:opacity-70" onclick="SignUp()">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function SignUp() {
+      const fname = document.getElementById("fname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const cpassword = document.getElementById("cpassword").value.trim();
+
+      // Check if all fields are filled
+      if (!fname || !email || !username || !password || !cpassword) {
+        Swal.fire({
+          title: "Error!",
+          text: "All fields are required.",
+          icon: "error"
+        });
+        return;
+      }
+
+      // Validate Email
+      const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+      if (!emailPattern.test(email)) {
+        Swal.fire({
+          title: "Invalid Email!",
+          text: "Please enter a valid email address.",
+          icon: "error"
+        });
+        return;
+      }
+
+      // Validate Username
+      const usernamePattern = /^[a-zA-Z0-9_-]{3,16}$/;
+      if (!usernamePattern.test(username)) {
+        Swal.fire({
+          title: "Invalid Username!",
+          text: "Username must be 3-16 characters long and can only include letters, numbers, underscores, and hyphens.",
+          icon: "error"
+        });
+        return;
+      }
+
+      // Validate Password
+      const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordPattern.test(password)) {
+        Swal.fire({
+          title: "Invalid Password!",
+          text: "Password must be at least 8 characters long and include at least one letter and one number.",
+          icon: "error"
+        });
+        return;
+      }
+
+      // Confirm Password Match
+      if (password !== cpassword) {
+        Swal.fire({
+          title: "Password Mismatch!",
+          text: "Passwords do not match. Please try again.",
+          icon: "error"
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: "Success!",
+        text: "Sign-Up successful.",
+        icon: "success"
+      });
+    }
+  </script>
+</body>
+</html>
