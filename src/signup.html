@@ -14,68 +14,80 @@
   <div class="md:flex md:m-0 m-2 bg-white md:w-[40rem] w-full shadow-lg rounded-xl overflow-hidden">
 
     <!-- Logo Section -->
-    <div id="logo" class="md:w-80 md:h-96 w-full h-40 flex flex-col items-center justify-center relative bg-gray-50">
+    <div id="logo" class="md:w-96 w-full flex flex-col items-center justify-center relative bg-gray-50">
       <div class="absolute bg-green-700 h-20 w-12 left-0"></div>
-      <h1 class="text-center md:text-[22px] text-[18px] text-green-700 z-10 my-2">JOIN US TODAY!</h1>
+      <h1 class="text-center md:text-[22px] text-[18px] text-green-700 z-10 my-2">JOIN US NOW!</h1>
       <div class="flex items-center justify-center">
         <img src="/src/assets/logo.png" alt="Logo" class="md:h-32 h-14 md:w-32 w-14 object-contain mb-2">
       </div>
     </div>
 
     <!-- Form Section -->
-    <div class="md:w-80 md:h-96 w-full flex items-center justify-center bg-green-700 text-white p-8">
+    <div class="md:w-96 w-full flex items-center justify-center bg-green-700 text-white p-8">
       <form id="signupForm" class="w-full max-w-sm space-y-4">
         <h1 class="text-center text-[30px]">SIGN UP</h1>
 
-        <!-- Name Field -->
+        <!-- Full Name Field -->
         <div>
-          <label for="name" class="block mb-1">Full Name</label>
-          <input id="name" type="text" placeholder="Enter your full name" required 
-                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300">
+          <label for="fullname" class="block mb-1">Full Name</label>
+          <input id="fullname" type="text" placeholder="Enter your full name" required 
+                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 text-[14px]">
         </div>
 
         <!-- Email Field -->
         <div>
           <label for="email" class="block mb-1">Email</label>
-          <input id="email" type="email" placeholder="Enter your email" required
-                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300">
+          <input id="email" type="email" placeholder="Enter your email" required 
+                 pattern="^[a-zA-Z0-9._%+-]+@cbsua\.edu\.ph$" 
+                 title="Please enter a valid @cbsua.edu.ph email address."
+                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 text-[14px]">
         </div>
 
         <!-- Password Field -->
-        <div>
+        <div class="password-container relative w-full">
           <label for="password" class="block mb-1">Password</label>
-          <input id="password" type="password" placeholder="Create a password" required 
-                 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
-                 title="Password must be at least 8 characters long, include at least one letter and one number."
-                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300">
+          <div class="relative">
+            <input id="password" type="password" placeholder="Create a password" required 
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
+                  title="Password must be at least 8 characters long, include at least one letter and one number."
+                  class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 pr-10 text-[14px]">
+            <span class="toggle-password absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="togglePasswordVisibility()">
+              <ion-icon name="eye-outline" class="text-gray-500"></ion-icon>
+            </span>
+          </div>
         </div>
 
         <!-- Confirm Password Field -->
-        <div>
+        <div class="password-container relative w-full">
           <label for="confirmPassword" class="block mb-1">Confirm Password</label>
-          <input id="confirmPassword" type="password" placeholder="Confirm your password" required
-                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300">
+          <div class="relative">
+            <input id="confirmPassword" type="password" placeholder="Confirm your password" required 
+                  class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 pr-10 text-[14px]">
+            <span class="toggle-password absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="togglePasswordVisibility()">
+              <ion-icon name="eye-outline" class="text-gray-500"></ion-icon>
+            </span>
+          </div>
         </div>
 
         <!-- Submit Button -->
-        <button type="button" class="w-full bg-green-700 border border-white text-white p-2 mt-4 rounded-md hover:opacity-80" onclick="handleSignUp()">Sign Up</button>
+        <button type="button" class="w-full bg-green-700 border border-white text-white p-2 mt-4 rounded-md hover:opacity-80" onclick="signUp()">Sign Up</button>
 
-        <h1 class="text-center mt-4 text-[12px]">Already have an account? 
-          <a href="login.html" class="underline">Log in</a>
+        <h1 class="text-center mt-4">Already have an account? 
+          <a href="index.html" class="underline">Log in</a>
         </h1>
       </form>
     </div>
   </div>
 
   <script>
-    function handleSignUp() {
-      const name = document.getElementById("name").value.trim();
+    function signUp() {
+      const fullname = document.getElementById("fullname").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
       const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
       // Check if all fields are filled
-      if (!name || !email || !password || !confirmPassword) {
+      if (!fullname || !email || !password || !confirmPassword) {
         Swal.fire({
           title: "Error!",
           text: "All fields are required.",
@@ -84,21 +96,21 @@
         return;
       }
 
-      // Validate Email
-      const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+      // Validate Email Domain
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@cbsua\.edu\.ph$/;
       if (!emailPattern.test(email)) {
         Swal.fire({
           title: "Invalid Email!",
-          text: "Please enter a valid email address.",
+          text: "Please enter a valid @cbsua.edu.ph email address.",
           icon: "error"
         });
         return;
       }
 
-      // Validate Password Confirmation
+      // Check if passwords match
       if (password !== confirmPassword) {
         Swal.fire({
-          title: "Password Mismatch!",
+          title: "Error!",
           text: "Passwords do not match.",
           icon: "error"
         });
@@ -107,10 +119,29 @@
 
       Swal.fire({
         title: "Success!",
-        text: "Sign-Up successful.",
+        text: "Account created successfully.",
         icon: "success"
       });
     }
+
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirmPassword');
+      const icon = document.querySelector('.toggle-password ion-icon');
+
+      if (passwordInput.type === 'password' || confirmPasswordInput.type === 'password') {
+        passwordInput.type = 'text';
+        confirmPasswordInput.type = 'text';
+        icon.setAttribute('name', 'eye-off-outline');
+      } else {
+        passwordInput.type = 'password';
+        confirmPasswordInput.type = 'password';
+        icon.setAttribute('name', 'eye-outline');
+      }
+    }
   </script>
+
+  <script type="module" src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
