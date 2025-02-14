@@ -706,6 +706,10 @@ video {
   background-image: url('/assets/bg-logo.jpg');
 }
 
+.bg-\[url\(\'\.\/assets\/bg-logo\.png\'\)\] {
+  background-image: url('./assets/bg-logo.png');
+}
+
 .bg-cover {
   background-size: cover;
 }
