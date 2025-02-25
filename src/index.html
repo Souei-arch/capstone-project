@@ -1,113 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine's Envelope</title>
   <link href="output.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
-  <title>Sign-In Form</title>
+  <script type="module" src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .envelope {
+      width: 420px;
+      height: 320px;
+      position: relative;
+      background: #fff1f2;
+      border: 2px solid #fda4af;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 12px 20px -4px rgba(0,0,0,0.1);
+    }
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #fda4af;
+      transform-origin: top;
+      transition: transform 0.7s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .letter {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff1f2;
+      transform: translateY(100%);
+      transition: transform 0.7s ease;
+      padding: 1rem;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #be123c;
+    }
+    .closed .flap {
+      transform: rotateX(0deg);
+    }
+    .open .flap {
+      transform: rotateX(-160deg);
+    }
+    .open .letter {
+      transform: translateY(0);
+    }
+  </style>
 </head>
-<body class="min-h-screen flex justify-center items-center poppins-regular bg-[url('/src/assets/bg-logo.jpg')] bg-cover">
-  <div class="md:flex md:m-0 m-2 bg-white md:w-[40rem] w-full shadow-lg rounded-xl overflow-hidden">
-  
-    <!-- Logo Section -->
-    <div id="logo" class="md:w-80 md:h-96 w-full h-40 flex flex-col items-center justify-center relative bg-gray-50">
-      <div class="absolute bg-green-700 h-20 w-12 left-0"></div>
-      <h1 class="text-center md:text-[22px] text-[18px] text-green-700 z-10 my-2">HELLO, WELCOME!</h1>
-      <div class="flex items-center justify-center">
-        <img src="./assets/logo.png" alt="Logo" class="md:h-32 h-14 md:w-32 w-14 object-contain mb-2">
-      </div>
+<body class="bg-gradient-to-r from-red-200 to-pink-200 flex flex-col justify-center items-center min-h-screen p-4 poppins-regular">
+  <div class="envelope closed" id="envelope">
+    <div class="flap">
+      <span>&hearts;</span>
     </div>
-  
-    <!-- Form Section -->
-    <div class="md:w-80 md:h-96 w-full flex items-center justify-center bg-green-700 text-white p-8">
-      <form id="signupForm" class="w-full max-w-sm space-y-4">
-        <h1 class="text-center text-[30px]">LOG IN</h1>
-  
-        <!-- Username Field -->
-        <div>
-          <label for="username" class="block mb-1">Email</label>
-          <input id="username" type="text" placeholder="Enter your email" required 
-                 pattern="^[a-zA-Z0-9._%+-]+@cbsua\.edu\.ph$" 
-                 title="Please enter a valid @cbsua.edu.ph email address."
-                 class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 text-[14px]">
-        </div>
-  
-      <!-- Password Field -->
-      <div class="password-container relative w-full">
-        <label for="password" class="block mb-1">Password</label>
-        <div class="relative">
-          <input id="password" type="password" placeholder="Enter your password" required 
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
-                title="Password must be at least 8 characters long, include at least one letter and one number."
-                class="p-2 w-full rounded-md text-black focus:ring-2 focus:ring-green-300 pr-10 text-[14px]">
-          <span class="toggle-password absolute inset-y-0 right-3 flex items-center cursor-pointer" onclick="togglePasswordVisibility()">
-            <ion-icon name="eye-outline" class="text-gray-500"></ion-icon>
-          </span>
-        </div>
-      </div>
-  
-        <!-- Submit Button -->
-        <button type="button" class="w-full bg-green-700 border border-white text-white p-2 mt-4 rounded-md hover:opacity-80" onclick="SignUp()">Log in</button>
-        
-        <h1 class="text-center mt-4">Don't have an account? 
-          <a href="signup.html" class="underline">Sign up</a>
-        </h1>
-      </form>
+    <div class="letter">    
+      <h2 class="font-bold mb-2 text-2xl text-red-600">
+        HAPPY ANNIVERSARY BABY! 
+        <ion-icon name="heart" class="text-red-500 text-3xl align-middle"></ion-icon>
+      </h2>
+      <h3> I LOVE YOU SO MUCH</h3>
     </div>
   </div>
   
+  <div class="mt-8">
+    <button id="toggleButton" class="px-8 py-3 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none shadow-lg">
+      Open Envelope
+    </button>
+  </div>
 
   <script>
-    function SignUp() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      // Check if all fields are filled
-      if (!username || !password) {
-        Swal.fire({
-          title: "Error!",
-          text: "All fields are required.",
-          icon: "error"
-        });
-        return;
-      }
-
-      // Validate Email Domain
-      const emailPattern = /^[a-z0-9._%+-]+@cbsua\.edu\.ph$/;
-      if (!emailPattern.test(username)) {
-        Swal.fire({
-          title: "Invalid Email!",
-          text: "Please enter a valid @cbsua.edu.ph email address.",
-          icon: "error"
-        });
-        return;
-      }
-
-      Swal.fire({
-        title: "Success!",
-        text: "Log-In successful.",
-        icon: "success"
-      });
-    }
-
-    function togglePasswordVisibility() {
-      const passwordInput = document.getElementById('password');
-      const icon = document.querySelector('.toggle-password ion-icon');
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        icon.setAttribute('name', 'eye-off-outline');
+    const envelope = document.getElementById('envelope');
+    const toggleButton = document.getElementById('toggleButton');
+    let isOpen = false;
+    toggleButton.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        envelope.classList.remove('closed');
+        envelope.classList.add('open');
+        toggleButton.textContent = 'Close Envelope';
       } else {
-        passwordInput.type = 'password';
-        icon.setAttribute('name', 'eye-outline');
+        envelope.classList.remove('open');
+        envelope.classList.add('closed');
+        toggleButton.textContent = 'Open Envelope';
       }
-    }
-
+    });
   </script>
-  <script type="module" src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
