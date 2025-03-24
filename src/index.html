@@ -3,102 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valentine's Envelope</title>
-  <link href="output.css" rel="stylesheet">
-  <script type="module" src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.js"></script>
+  <title>Happy Anniversary</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="https://unpkg.com/ionicons@6.0.4/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@6.0.4/dist/ionicons.js"></script>
   <style>
-    .envelope {
-      width: 420px;
-      height: 320px;
-      position: relative;
-      background: #fff1f2;
-      border: 2px solid #fda4af;
-      border-radius: 0.75rem;
-      overflow: hidden;
-      box-shadow: 0 12px 20px -4px rgba(0,0,0,0.1);
+    @keyframes confettiFall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
-    .flap {
+    .confetti {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: #fda4af;
-      transform-origin: top;
-      transition: transform 0.7s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
-    .letter {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #fff1f2;
-      transform: translateY(100%);
-      transition: transform 0.7s ease;
-      padding: 1rem;
-      box-sizing: border-box;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #be123c;
-    }
-    .closed .flap {
-      transform: rotateX(0deg);
-    }
-    .open .flap {
-      transform: rotateX(-160deg);
-    }
-    .open .letter {
-      transform: translateY(0);
+      width: 8px;
+      height: 12px;
+      border-radius: 2px;
+      opacity: 0;
+      animation: confettiFall 2.5s linear forwards;
     }
   </style>
 </head>
-<body class="bg-gradient-to-r from-red-200 to-pink-200 flex flex-col justify-center items-center min-h-screen p-4 poppins-regular">
-  <div class="envelope closed" id="envelope">
-    <div class="flap">
+<body class="bg-gradient-to-r from-red-200 to-pink-200 flex flex-col justify-center items-center min-h-screen p-4 font-sans relative overflow-hidden">
+  
+  <!-- Confetti Container -->
+  <div id="confetti-container" class="absolute inset-0 pointer-events-none hidden"></div>
+
+  <div class="relative w-full max-w-sm md:max-w-md lg:max-w-lg bg-pink-100 border-4 border-pink-300 rounded-xl shadow-lg overflow-hidden transition-all duration-700 transform" id="envelope">
+    <div class="absolute top-0 left-0 w-full h-1/2 bg-pink-300 flex items-center justify-center text-white text-xl font-semibold transform transition-transform duration-700 origin-top z-20" id="flap">
       <span>&hearts;</span>
     </div>
-    <div class="letter">    
-      <h3 class="font-bold mb-2 text-2xl text-red-600">
-        HAPPY ANNIVERSARY BABY! 
+    <div class="w-full h-full flex flex-col justify-center items-center text-center px-6 py-8 transform translate-y-full transition-transform duration-700 z-10 bg-pink-100 text-pink-800" id="letter">
+      <h3 class="text-lg font-bold mb-2 text-red-600">
+        HAPPY ANNIVERSARY BABY!
         <ion-icon name="heart" class="text-red-500 text-3xl align-middle"></ion-icon>
       </h3>
-      <p class="text-justify">Hi Baby, Happy Anniversary! i love you and i miss you so much, alam ko na marami akung pag kukulang bilang boyfriend sayo, di kita ma hug pag alam kung mabigat yung nararamdaman mo, di kita maalagan pag may sakit ka dahil malayo ako sayo, basta wag mo papabayaan ang sarili mo, kunting tiis nlng baby magiging okay din ang lahat. Ingat ka jan palagi ha AAGUMON TAKA PA!.</p>
-      <h1 class="font-bold text-left">I LOVE YOU SO MUCH BABY MWUAHHHH...</h1>
+      <p class="text-sm text-justify mb-4">
+        Hi Baby, Happy Anniversary! I love you and I miss you so much. Sorry kung minsan permi akong busy, dae maka-my day permi, dae ma-effort. Aram mo man na padangaton taka maski minsan sinasabi mong dae, pero promise ko saimo na ika lang, mayo ng iba. Mabawi ko saimo pag ako may work na. Nagamit ko man giraray ang skills ko haha mwuahh.
+      </p>
+      <h1 class="font-bold text-left w-full">I LOVE YOU SO MUCH BABY MWUAHHHH...</h1>
+      <div class="grid grid-cols-2 gap-3 mt-4">
+        <img src="/src/assets/l1.jpg" alt="Memory 1" class="w-full h-32 object-cover rounded-lg shadow-md">
+        <img src="/src/assets/l2.jpg" alt="Memory 2" class="w-full h-32 object-cover rounded-lg shadow-md">
+        <img src="/src/assets/l3.jpg" alt="Memory 3" class="w-full h-32 object-cover rounded-lg shadow-md">
+        <img src="/src/assets/l4.jpg" alt="Memory 4" class="w-full h-32 object-cover rounded-lg shadow-md">
+      </div>
     </div>
   </div>
-  
+
   <div class="mt-8">
-    <button id="toggleButton" class="px-8 py-3 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none shadow-lg">
+    <button id="toggleButton" class="px-6 py-2 md:px-8 md:py-3 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none shadow-lg transition-all duration-300">
       Open Envelope
     </button>
   </div>
 
   <script>
     const envelope = document.getElementById('envelope');
+    const flap = document.getElementById('flap');
+    const letter = document.getElementById('letter');
     const toggleButton = document.getElementById('toggleButton');
+    const confettiContainer = document.getElementById('confetti-container');
+
     let isOpen = false;
+
     toggleButton.addEventListener('click', () => {
       isOpen = !isOpen;
       if (isOpen) {
-        envelope.classList.remove('closed');
-        envelope.classList.add('open');
+        flap.style.transform = 'rotateX(-160deg)';
+        letter.style.transform = 'translateY(0)';
         toggleButton.textContent = 'Close Envelope';
+        launchConfetti();
       } else {
-        envelope.classList.remove('open');
-        envelope.classList.add('closed');
+        flap.style.transform = 'rotateX(0deg)';
+        letter.style.transform = 'translateY(100%)';
         toggleButton.textContent = 'Open Envelope';
+        confettiContainer.innerHTML = ''; 
       }
     });
+
+    function launchConfetti() {
+      confettiContainer.innerHTML = '';
+      confettiContainer.classList.remove('hidden');
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        const colors = ['#f43f5e', '#facc15', '#4ade80', '#38bdf8', '#c084fc'];
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `-${Math.random() * 20}px`;
+        confetti.style.width = `${Math.random() * 6 + 4}px`;
+        confetti.style.height = `${Math.random() * 8 + 6}px`;
+        confetti.style.animationDuration = `${2 + Math.random() * 2}s`;
+        confettiContainer.appendChild(confetti);
+      }
+    }
   </script>
 </body>
 </html>
